@@ -1,14 +1,18 @@
-Demonstration of how to support `msbuild/r` (msbuild with nuget package restore) when adding `<PackageReference/>` via targets.
+Demonstration of how to support `msbuild/r` (msbuild with nuget package restore) when adding `<ProjectReference/>` via targets.
 
 # Use Case
 
 You may want to dynamically calculate which projects to include in your build based on configuration such as licensing.
+Thus, you develop an MSBuild target which runs prior to `BeforeResolveReferences` to dynamically scan for and add optional projects by adding `<ProjectReference/>`.
+However, you find that these dynamically added `<ProjectReference/>` are ignored by the restore phase of `msbuild/r`.
 
 # Implementation
 
 See [Runner/Build/AddDynamicReferences.targets](Runner/Build/AddDynamicReferences.targets).
 
 # Pitfalls
+
+## Visual Studio
 
 Dynamically adding `<PackageReference/>` is only supported by `msbuild` itself.
 Visual Studio manages build dependencies internally and does not provide a reasonable way to recognize dependencies added by targets.
