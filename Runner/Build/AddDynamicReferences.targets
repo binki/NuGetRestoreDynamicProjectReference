@@ -11,21 +11,6 @@
     </ItemGroup>
   </Target>
   <!--
-      Let msbuild/r know about the dynamic references so that it can
-      restore them.
-
-      I do not know of a public hook point for
-      this. _LoadRestoreGraphEntryPoints seems the correct place to do
-      this and it works. Unfortunately, this is not guaranteed to work
-      in future releases of nuget.
-  -->
-  <Target BeforeTargets="_LoadRestoreGraphEntryPoints" DependsOnTargets="MyCollectDynamicProjectReferences" Name="MyAddRestoreGraphProjectInputItems">
-    <ItemGroup>
-      <!-- Use FullPath to get normalized path to avoid NU1105 -->
-      <RestoreGraphProjectInputItems Include="%(MyDynamicProjectReference.FullPath)"/>
-    </ItemGroup>
-  </Target>
-  <!--
       Let msbuild know about dynamic references so that it can take
       care of dependencies, copying assemblies around.
   -->
