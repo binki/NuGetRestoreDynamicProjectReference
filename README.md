@@ -17,3 +17,8 @@ See [Runner/Build/AddDynamicReferences.targets](Runner/Build/AddDynamicReference
 Dynamically adding `<PackageReference/>` is only supported by `msbuild` itself.
 Visual Studio manages build dependencies internally and does not provide a reasonable way to recognize dependencies added by targets.
 You may choose to instruct Visual Studio to always invoke `msbuild` for builds (is that possible?) or have special logic to write dependencies to files and `<Error/>` out and touch the project file to force VS users to reload the project when you detect that you are being built in VS.
+
+## Private API
+
+This solution relies on a private API.
+I have opened https://github.com/NuGet/Home/issues/7288 to inquire about making this a supported scenario or discovering if there might be some other more acceptable mechanism to achieve the same effect.
