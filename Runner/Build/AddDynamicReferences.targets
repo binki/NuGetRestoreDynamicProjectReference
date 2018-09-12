@@ -23,6 +23,12 @@
     <ItemGroup>
       <!-- Use FullPath to get normalized path to avoid NU1105 -->
       <RestoreGraphProjectInputItems Include="%(MyDynamicProjectReference.FullPath)"/>
+      <!--
+	  Must also include current project because
+	  _LoadRestoreGraphEntryPoints will not set
+	  RestoreGraphProjectInputItems if it is already non-empty.
+      -->
+      <RestoreGraphProjectInputItems Include="$(MSBuildProjectFullPath)"/>
     </ItemGroup>
   </Target>
   <!--
