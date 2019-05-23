@@ -40,4 +40,21 @@
       <ProjectReference Include="@(MyDynamicProjectReference)"/>
     </ItemGroup>
   </Target>
+  <!--
+      Make up for NuGet’s inability to collect package references by
+      loading them from dependencies. This way, we can make transitive
+      dependencies sort of work.
+  -->
+  <Target BeforeTargets="CollectPackageReferences" DependsOnTargets="MyCollectDynamicProjectReferences" Name="MyCollectPackageReferences">
+    <MSBuild
+        BuildInParallel="$(BuildInParallel)"
+        Projects="@(MyDynamicProjectReference)"
+        Targets="CollectPackageReferences"
+        >
+      <Output
+          ItemName="PackageReference"
+          TaskParameter="TargetOutputs"
+          />
+    </MSBuild>
+  </Target>
 </Project>
