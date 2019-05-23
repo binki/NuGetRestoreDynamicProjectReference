@@ -1,4 +1,4 @@
-Copyright (c) 2018 Direct ConneX, LLC
+Copyright (c) 2018-2019 Direct ConneX, LLC
 
 Permission is hereby granted, free of charge, to any person obtaining
 a copy of this software and associated documentation files (the
